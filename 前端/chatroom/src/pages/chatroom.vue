@@ -109,7 +109,9 @@ export default {
     }
     this.tomsg.user = this.$store.state.user
 
-    this.websocket = new WebSocket('ws://localhost:8080/chatroom?username='
+/*    this.websocket = new WebSocket('ws://localhost:8080/chatroom?username='
+        + this.tomsg.user.username+"&id="+this.tomsg.user.id);*/
+    this.websocket = new WebSocket('ws://47.113.146.226:8080/chatroom?username='
         + this.tomsg.user.username+"&id="+this.tomsg.user.id);
     this.websocket.addEventListener('open', this.onOpen);
     // 监听 WebSocket 消息事件

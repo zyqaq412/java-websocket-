@@ -7,7 +7,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios';
 // 配置axios请求的根路径
-axios.defaults.baseURL = 'http://localhost:8888';
+/*axios.defaults.baseURL = 'http://localhost:8888';*/
+axios.defaults.baseURL = 'http://47.113.146.226:8888';
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 new Vue({
