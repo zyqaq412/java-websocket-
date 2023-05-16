@@ -62,4 +62,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return false;
     }
 
+    @Override
+    public Result login(UserRegisterRequest user) {
+        if(StringUtils.isAnyBlank(user.getUserAccount(),user.getUserPassword())){
+            return Result.error("用户名或密码为空");
+        }
+        user.setUserPassword(DigestUtils.md5DigestAsHex((SALT + user.getUserPassword())
+                .getBytes())) ;
+
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUseraccount,user.getUserAccount());
+        queryWrapper.eq(User::getUserpassword,user.getUserPassword());
+        User flag = getOne(queryWrapper);
+        if (null == flag) {
+            return Result.error("密码错误");
+        }
+
+        UserVo userVo = new UserVo();
+        userVo.setUsername(flag.getUseraccount());
+        userVo.setId(flag.getId());
+        return Result.ResultOk(userVo);
+    }
+
+
 }

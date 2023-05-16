@@ -28,6 +28,11 @@ public interface UserService extends IService<User> {
      */
     boolean isEmailNull(ToEmail toEmail);
 
-
+    /**
+     *  用户登录
+     * @param user 用户数据
+     * @return 返回用户信息(用户名与id)
+     */
+    Result login(UserRegisterRequest user);
 }
 

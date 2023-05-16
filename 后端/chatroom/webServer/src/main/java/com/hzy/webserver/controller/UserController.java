@@ -37,5 +37,10 @@ public class UserController {
         return Result.error("验证码错误");
     }
 
-
+    @PostMapping("/login")
+    public Result userLogin(@RequestBody UserRegisterRequest user){
+        log.info("登录请求");
+        if (null == user) return Result.error("参数不能为空");
+        return userService.login(user);
+    }
 }
