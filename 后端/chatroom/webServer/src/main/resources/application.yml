@@ -2,7 +2,7 @@ server:
   port: 8888
 spring:
   redis:
-    host: localhost # Redis ?????
+    host: 47.113.146.226 # Redis ?????
     port: 6379 # Redis ???
     password:  # Redis ?????????????
     database: 0 # Redis ?????
@@ -11,7 +11,7 @@ spring:
     protocol: smtp
     default-encoding: UTF-8
     username: 2791517764@qq.com
-    password:
+    password: sjrvyqncuanvddag
     test-connection: true
     properties:
       mail:
@@ -26,14 +26,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/yhzx?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
-    password:
-
-# ?????
+    password: 120125hzy.
 oss:
   endpoint: oss-cn-chengdu.aliyuncs.com
-  keyid:
-  keysecret:
-  bucketname:
+  keyid: LTAI5tDwkMpEN267sGWBDB2q
+  keysecret: sIVcsIMjXc4rZoDwjhxU5mFs4QDgz9
+  bucketname: zyqaq-blog
 
 
 
