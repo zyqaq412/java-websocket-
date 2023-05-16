@@ -1,1 +1,40 @@
+server:
+  port: 8888
+spring:
+  redis:
+    host: localhost # Redis ?????
+    port: 6379 # Redis ???
+    password:  # Redis ?????????????
+    database: 0 # Redis ?????
+  mail:
+    host: smtp.qq.com
+    protocol: smtp
+    default-encoding: UTF-8
+    username: 2791517764@qq.com
+    password:
+    test-connection: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+    port: 587
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yhzx?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password:
+
+# ?????
+oss:
+  endpoint: oss-cn-chengdu.aliyuncs.com
+  keyid:
+  keysecret:
+  bucketname:
+
+
+
 
