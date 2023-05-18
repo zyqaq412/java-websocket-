@@ -15,6 +15,21 @@
             <div class="preview" v-html="show(notice.gg)"/>
           </div>
         </el-card>
+        <el-card class="chatroom-users">
+          <div>
+            <div class="chatroom-users-header">文件发送</div>
+            <div>
+              <label for="upload-file" class="custom-upload">
+                <input id="upload-file" type="file" @change="handleFileChange" ref="fileInput" />
+              </label>
+              <div v-if="selectedFileName" class="selected-file">{{ selectedFileName }}</div>
+              <el-button v-if="selectedFileName" type="primary" plain @click="clearFile">清除</el-button>
+            </div>
+            <div id="wj">
+              <el-button type="primary" plain @click="uploadFile">发送文件</el-button>
+            </div>
+          </div>
+        </el-card>
       </el-col>
       <el-col :span="16">
         <el-card class="chatroom-message">
@@ -65,6 +80,8 @@ export default {
 
   data() {
     return {
+      selectedFileName: '' ,// 存储已选择的文件名
+      file: null,
       // 输入框工具类
       toolbars :{
         preview: true, // 预览
@@ -125,6 +142,42 @@ export default {
 
   },
   methods: {
+    uploadFile() {
+      if (this.file){
+        const formData = new FormData()
+        formData.append('file', this.file)
+        return axios.post('/upload/file', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(response => {
+          this.tomsg.messageInput = response.data.data;
+          this.sendMessage()
+          this.$message.success("文件发送成功")
+          this.file = null
+        }).catch(error => {
+          throw new Error(error.message)
+        })
+      }else {
+        this.$message.error('文件为空');
+      }
+
+    },
+    clearFile() {
+      this.selectedFileName = '';
+      // 清除文件输入框的值
+      this.$refs.fileInput.value = '';
+      this.file =null
+    },
+    handleFileChange(event) {
+      this.file = event.target.files[0];
+      if (this.file && this.file.size > 5 * 1024 * 1024){
+        this.$message.error('文件大小超过限制，建议小于5mb');
+        this.file = null
+        return
+      }
+      this.selectedFileName = this.file.name;
+    },
     uploadImg(img) {
       const formData = new FormData()
       formData.append('img', img)
@@ -237,6 +290,9 @@ export default {
 </script>
 
 <style>
+#wj{
+  margin-top: 100px;
+}
 #edit{
   width: 1200px;
   resize: none; /* 禁止拖动 */

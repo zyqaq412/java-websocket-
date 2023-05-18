@@ -26,4 +26,9 @@ public class FileController {
         return fileService.uploadImg(multipartFile);
 
     }
+    @PostMapping("/upload/file")
+    public Result uploadFile(@RequestParam("file") MultipartFile multipartFile) {
+        System.out.println("上传文件");
+        return fileService.uploadFile(multipartFile);
+    }
 }

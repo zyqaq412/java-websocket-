@@ -9,9 +9,16 @@ const routes = [
         path: '/',
         redirect: '/login'
     },
-    { path: '/chatroom', component: ()=>import('../pages/chatroom.vue') },
-    { path: '/login', component: ()=>import('../pages/login.vue') },
-    { path: '/register', component: ()=>import('../pages/register.vue') },
+    {
+        path: '/chatroom', component: ()=>import('../pages/chatroom.vue')
+    },
+    {
+        path: '/login', component: ()=>import('../pages/login.vue')
+    },
+    {
+        path: '/register', component: ()=>import('../pages/register.vue')
+    },
+
 ]
 
 // 创建 router 实例

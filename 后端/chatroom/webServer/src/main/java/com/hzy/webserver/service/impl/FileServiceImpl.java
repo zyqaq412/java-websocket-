@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * @title: FileServiceImpl
@@ -37,6 +38,21 @@ public class FileServiceImpl implements FileService {
         String filePath = PathUtils.generateFilePath(originalFilename);
         String url = upload(img, filePath);//  2099/2/3/wqeqeqe.png
         System.out.println(url);
+        return Result.ResultOk(url);
+    }
+
+    @Override
+    public Result uploadFile(MultipartFile multipartFile) {
+        String fileName = multipartFile.getOriginalFilename();
+        fileName = fileName.replaceAll(" ","");
+        // String fileName = file.getOriginalFilename();
+        //生成随机唯一值，使用uuid，添加到文件名称里面，不会导致重名
+         String uuid = UUID.randomUUID()
+                 .toString()
+                 .replaceAll("-","");
+
+         fileName = uuid+"-"+fileName;
+         String url = upload(multipartFile, fileName);
         return Result.ResultOk(url);
     }
 

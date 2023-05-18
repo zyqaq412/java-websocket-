@@ -2,16 +2,16 @@ server:
   port: 8888
 spring:
   redis:
-    host: 47.113.146.226 # Redis ?????
-    port: 6379 # Redis ???
-    password:  # Redis ?????????????
-    database: 0 # Redis ?????
+    host: localhost # Redis 服务器地址
+    port: 6379 # Redis 端口号
+    password:  # Redis 密码，如果没有则不需要配置
+    database: 0 # Redis 数据库编号
   mail:
     host: smtp.qq.com
     protocol: smtp
     default-encoding: UTF-8
     username: 2791517764@qq.com
-    password: sjrvyqncuanvddag
+    password:
     test-connection: true
     properties:
       mail:
@@ -26,12 +26,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/yhzx?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
-    password: 120125hzy.
+    password:
+
+# 阿里云配置
 oss:
   endpoint: oss-cn-chengdu.aliyuncs.com
-  keyid: LTAI5tDwkMpEN267sGWBDB2q
-  keysecret: sIVcsIMjXc4rZoDwjhxU5mFs4QDgz9
-  bucketname: zyqaq-blog
+  keyid:
+  keysecret:
+  bucketname:
 
 
 
