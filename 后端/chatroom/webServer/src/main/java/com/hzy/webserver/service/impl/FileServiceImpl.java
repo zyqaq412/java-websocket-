@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -44,15 +46,22 @@ public class FileServiceImpl implements FileService {
     @Override
     public Result uploadFile(MultipartFile multipartFile) {
         String fileName = multipartFile.getOriginalFilename();
-        fileName = fileName.replaceAll(" ","");
+        fileName = fileName.replaceAll(" ", "")
+                // 文件名中的+号一定要替换
+                /* 不然会报这个错
+                    <Code>NoSuchKey</Code>
+                  <Message>The specified key does not exist.</Message>
+                 */
+                .replaceAll("\\+","-");
         // String fileName = file.getOriginalFilename();
         //生成随机唯一值，使用uuid，添加到文件名称里面，不会导致重名
-         String uuid = UUID.randomUUID()
-                 .toString()
-                 .replaceAll("-","");
-
-         fileName = uuid+"-"+fileName;
-         String url = upload(multipartFile, fileName);
+        String uuid = UUID.randomUUID()
+                .toString()
+                .replaceAll("-", "");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
+        String datePath = sdf.format(new Date());
+        fileName = datePath + uuid + "-" + fileName;
+        String url = upload(multipartFile, fileName);
         return Result.ResultOk(url);
     }
 
